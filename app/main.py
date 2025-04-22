@@ -18,4 +18,13 @@ async def upload_csv(file: UploadFile = File(...)):
         'column_stats': df.describe().to_dict()
     }
     # Return the statistics as JSON
-    return json.dumps(stats) 
+    return json.dumps(stats)
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the CSV Stats API! Use POST /upload-csv/ to upload a CSV file."}
+
+@app.put("/update-config/")
+async def update_config(config: dict):
+    # For demonstration, just return the received config
+    return {"updated_config": config} 
